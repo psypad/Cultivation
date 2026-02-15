@@ -1,8 +1,4 @@
-/**
- * Base44 Client Replacement
- * 
- * This file re-exports the local database implementation
- * as a drop-in replacement for the Base44 SDK.
- */
+// Legacy compatibility module.
+// New code should import from `@/api/localApi`.
 
-export { base44 } from './localDatabase';
+export { localApi } from './localApi';

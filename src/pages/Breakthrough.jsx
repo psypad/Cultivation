@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localApi } from "@/api/localApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
@@ -40,10 +40,10 @@ export default function Breakthrough() {
     queryKey: ["cultivation", cultivationId],
     queryFn: async () => {
       if (cultivationId) {
-        const all = await base44.entities.Cultivation.list();
+        const all = await localApi.entities.Cultivation.list();
         return all.filter(c => c.id === cultivationId);
       }
-      return base44.entities.Cultivation.list();
+      return localApi.entities.Cultivation.list();
     },
   });
 
@@ -51,9 +51,9 @@ export default function Breakthrough() {
     queryKey: ["practices-all", cultivationId],
     queryFn: () => {
       if (cultivationId) {
-        return base44.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", 365);
+        return localApi.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", 365);
       }
-      return base44.entities.Practice.list("-date", 365);
+      return localApi.entities.Practice.list("-date", 365);
     },
     enabled: !!cultivationId,
   });
@@ -114,13 +114,13 @@ export default function Breakthrough() {
       const success = Math.random() * 100 < successChance;
 
       if (success && nextStage) {
-        await base44.entities.Cultivation.update(userCultivation.id, {
+        await localApi.entities.Cultivation.update(userCultivation.id, {
           current_realm: nextStage.realm,
           realm_phase: nextStage.phase,
           last_breakthrough_attempt: format(new Date(), "yyyy-MM-dd"),
         });
       } else {
-        await base44.entities.Cultivation.update(userCultivation.id, {
+        await localApi.entities.Cultivation.update(userCultivation.id, {
           last_breakthrough_attempt: format(new Date(), "yyyy-MM-dd"),
         });
       }
