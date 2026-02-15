@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localApi } from "@/api/localApi";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { format, subDays, eachDayOfInterval, isSameDay } from "date-fns";
+import { subDays, eachDayOfInterval, isSameDay } from "date-fns";
 import PracticeDensityChart from "@/components/history/PracticeDensityChart";
 import TrendDescriptor from "@/components/history/TrendDescriptor";
 
 export default function History() {
-  const [window, setWindow] = useState(90);
+  const [windowDays, setWindowDays] = useState(90);
 
   const [searchParams] = useSearchParams();
   const cultivationId = searchParams.get("id");
@@ -18,9 +18,9 @@ export default function History() {
     queryKey: ["practices", windowDays, cultivationId],
     queryFn: () => {
       if (cultivationId) {
-        return base44.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", windowDays);
+        return localApi.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", windowDays);
       }
-      return base44.entities.Practice.list("-date", windowDays);
+      return localApi.entities.Practice.list("-date", windowDays);
     },
     enabled: !!cultivationId,
   });

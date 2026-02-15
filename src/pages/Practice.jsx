@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import React, { useState } from "react";
+import { localApi } from "@/api/localApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { format, isToday, parseISO } from "date-fns";
+import { format } from "date-fns";
 
 export default function Practice() {
   const [showDuration, setShowDuration] = useState(false);
@@ -21,9 +21,9 @@ export default function Practice() {
     queryKey: ["practices", cultivationId],
     queryFn: () => {
       if (cultivationId) {
-        return base44.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", 7);
+        return localApi.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", 7);
       }
-      return base44.entities.Practice.list("-date", 7);
+      return localApi.entities.Practice.list("-date", 7);
     },
     enabled: !!cultivationId,
   });
@@ -32,10 +32,10 @@ export default function Practice() {
     queryKey: ["cultivation", cultivationId],
     queryFn: async () => {
       if (cultivationId) {
-        const all = await base44.entities.Cultivation.list();
+        const all = await localApi.entities.Cultivation.list();
         return all.filter(c => c.id === cultivationId);
       }
-      return base44.entities.Cultivation.list();
+      return localApi.entities.Cultivation.list();
     },
   });
 
@@ -51,10 +51,10 @@ export default function Practice() {
         ...(practiced && duration ? { duration_minutes: parseInt(duration) } : {}),
       };
 
-      await base44.entities.Practice.create(practiceData);
+      await localApi.entities.Practice.create(practiceData);
 
       if (practiced && userCultivation) {
-        await base44.entities.Cultivation.update(userCultivation.id, {
+        await localApi.entities.Cultivation.update(userCultivation.id, {
           total_days_practiced: (userCultivation.total_days_practiced || 0) + 1,
         });
       }

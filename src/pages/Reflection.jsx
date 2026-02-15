@@ -1,5 +1,5 @@
 import React from "react";
-import { base44 } from "@/api/base44Client";
+import { localApi } from "@/api/localApi";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { createPageUrl } from "@/utils";
@@ -19,9 +19,9 @@ export default function Reflection() {
     queryKey: ["practices-month", cultivationId],
     queryFn: () => {
       if (cultivationId) {
-        return base44.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", 31);
+        return localApi.entities.Practice.filter({ cultivation_id: cultivationId }, "-date", 31);
       }
-      return base44.entities.Practice.list("-date", 31);
+      return localApi.entities.Practice.list("-date", 31);
     },
     enabled: !!cultivationId,
   });
@@ -30,10 +30,10 @@ export default function Reflection() {
     queryKey: ["cultivation", cultivationId],
     queryFn: async () => {
       if (cultivationId) {
-        const all = await base44.entities.Cultivation.list();
+        const all = await localApi.entities.Cultivation.list();
         return all.filter(c => c.id === cultivationId);
       }
-      return base44.entities.Cultivation.list();
+      return localApi.entities.Cultivation.list();
     },
   });
 

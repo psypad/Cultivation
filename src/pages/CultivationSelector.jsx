@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localApi } from "@/api/localApi";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
@@ -12,7 +12,7 @@ export default function CultivationSelector() {
 
   const { data: cultivations, isLoading, refetch } = useQuery({
     queryKey: ["cultivations-all"],
-    queryFn: () => base44.entities.Cultivation.list("-created_date"),
+    queryFn: () => localApi.entities.Cultivation.list("-created_date"),
   });
 
   if (isLoading) {

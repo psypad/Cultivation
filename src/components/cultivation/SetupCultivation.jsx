@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localApi } from "@/api/localApi";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 
@@ -12,7 +12,7 @@ export default function SetupCultivation({ onComplete }) {
     if (!daoName.trim()) return;
 
     setIsSubmitting(true);
-    await base44.entities.Cultivation.create({
+    await localApi.entities.Cultivation.create({
       dao_name: daoName.trim(),
       current_realm: "Mortal",
       realm_phase: "Early",
