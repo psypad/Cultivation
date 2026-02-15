@@ -17,44 +17,6 @@ export default function Layout({ children, currentPageName }) {
 
   return (
     <div className="min-h-screen bg-[#1a1a1a]">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
-        
-        :root {
-          --font-serif: 'Cormorant Garamond', serif;
-          --font-sans: 'Inter', sans-serif;
-        }
-        
-        body {
-          font-family: var(--font-sans);
-          background-color: #1a1a1a;
-          color: #e8e4dc;
-        }
-        
-        .font-serif {
-          font-family: var(--font-serif);
-          font-weight: 500;
-        }
-        
-        * {
-          scrollbar-width: thin;
-          scrollbar-color: #3a3a3a #1a1a1a;
-        }
-        
-        *::-webkit-scrollbar {
-          width: 6px;
-        }
-        
-        *::-webkit-scrollbar-track {
-          background: #1a1a1a;
-        }
-        
-        *::-webkit-scrollbar-thumb {
-          background-color: #3a3a3a;
-          border-radius: 3px;
-        }
-      `}</style>
-
       {/* Minimal Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] border-t border-[#2a2a2a] z-50 md:top-0 md:bottom-auto md:border-t-0 md:border-b">
         <div className="max-w-3xl mx-auto px-4">
