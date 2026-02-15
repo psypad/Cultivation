@@ -1,0 +1,64 @@
+{
+  "name": "Cultivation",
+  "type": "object",
+  "properties": {
+    "dao_name": {
+      "type": "string",
+      "description": "The name of the cultivation path"
+    },
+    "current_realm": {
+      "type": "string",
+      "enum": [
+        "Mortal",
+        "Qi Condensation",
+        "Foundation Establishment",
+        "Core Formation",
+        "Nascent Soul",
+        "Spirit Severing",
+        "Dao Seeking",
+        "Immortal Ascension"
+      ],
+      "default": "Mortal",
+      "description": "Current cultivation realm"
+    },
+    "realm_phase": {
+      "type": "string",
+      "enum": [
+        "Early",
+        "Mid",
+        "Late",
+        "Peak"
+      ],
+      "default": "Early",
+      "description": "Phase within current realm"
+    },
+    "cultivation_state": {
+      "type": "string",
+      "enum": [
+        "Advancing",
+        "Stagnating",
+        "Recovering"
+      ],
+      "default": "Advancing",
+      "description": "Current cultivation state"
+    },
+    "total_days_practiced": {
+      "type": "number",
+      "default": 0,
+      "description": "Total accumulated practice days"
+    },
+    "cultivation_started": {
+      "type": "string",
+      "format": "date",
+      "description": "Date cultivation began"
+    },
+    "last_breakthrough_attempt": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of last breakthrough attempt"
+    }
+  },
+  "required": [
+    "dao_name"
+  ]
+}

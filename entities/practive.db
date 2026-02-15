@@ -1,0 +1,28 @@
+{
+  "name": "Practice",
+  "type": "object",
+  "properties": {
+    "cultivation_id": {
+      "type": "string",
+      "description": "Reference to the cultivation path"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of the practice entry"
+    },
+    "practiced": {
+      "type": "boolean",
+      "description": "Whether practice occurred"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "Optional duration in minutes"
+    }
+  },
+  "required": [
+    "cultivation_id",
+    "date",
+    "practiced"
+  ]
+}
