@@ -3,8 +3,8 @@ import { localApi } from "@/api/localApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { motion, AnimatePresence } from "framer-motion";
-import { format, subDays, differenceInDays } from "date-fns";
+import { motion } from "framer-motion";
+import { format, subDays } from "date-fns";
 
 const REALM_ORDER = [
   "Mortal",
@@ -108,7 +108,7 @@ export default function Breakthrough() {
       // Calculate success probability based on how much they exceed requirements
       const daysExcess = Math.max(0, (userCultivation.total_days_practiced || 0) - requirements.days);
       const densityExcess = Math.max(0, density90 - requirements.density);
-      
+
       // Base 50% chance, +2% per extra day, +1% per extra density point, capped at 85%
       const successChance = Math.min(85, 50 + (daysExcess * 0.5) + (densityExcess * 1));
       const success = Math.random() * 100 < successChance;
@@ -295,11 +295,10 @@ export default function Breakthrough() {
             whileHover={meetsRequirements ? { scale: 1.02 } : {}}
             whileTap={meetsRequirements ? { scale: 0.98 } : {}}
             transition={{ duration: 0.3 }}
-            className={`px-12 py-4 border tracking-wider text-sm uppercase transition-colors duration-500 ${
-              meetsRequirements
+            className={`px-12 py-4 border tracking-wider text-sm uppercase transition-colors duration-500 ${meetsRequirements
                 ? "border-[#7c9a82]/40 text-[#7c9a82] hover:bg-[#7c9a82]/10"
                 : "border-[#3a3a3a] text-[#4a4a4a] cursor-not-allowed"
-            }`}
+              }`}
           >
             {breakthroughMutation.isPending
               ? "Attempting..."

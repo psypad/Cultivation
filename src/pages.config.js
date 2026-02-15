@@ -66,7 +66,7 @@ export const PAGES = {
 }
 
 export const pagesConfig = {
-    mainPage: "Dashboard",
+    mainPage: "CultivationSelector",
     Pages: PAGES,
     Layout: __Layout,
 };

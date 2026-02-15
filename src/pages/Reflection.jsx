@@ -4,12 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth } from "date-fns";
+import { format, startOfMonth, eachDayOfInterval, isSameMonth } from "date-fns";
 
 export default function Reflection() {
   const today = new Date();
   const monthStart = startOfMonth(today);
-  const monthEnd = endOfMonth(today);
+
   const daysInMonth = eachDayOfInterval({ start: monthStart, end: today });
 
   const [searchParams] = useSearchParams();
@@ -125,13 +125,12 @@ export default function Reflection() {
                 return (
                   <div
                     key={index}
-                    className={`aspect-square rounded-sm flex items-center justify-center text-xs ${
-                      practice?.practiced
-                        ? "bg-[#7c9a82] text-[#1a1a1a]"
-                        : practice
+                    className={`aspect-square rounded-sm flex items-center justify-center text-xs ${practice?.practiced
+                      ? "bg-[#7c9a82] text-[#1a1a1a]"
+                      : practice
                         ? "bg-[#3a3a3a] text-[#8a8680]"
                         : "bg-[#2a2a2a] text-[#4a4a4a]"
-                    }`}
+                      }`}
                   >
                     {format(day, "d")}
                   </div>

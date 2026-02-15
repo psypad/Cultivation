@@ -7,7 +7,7 @@ const PHASE_PROGRESS = {
   Peak: 0.875,
 };
 
-export default function ProgressArc({ density, phase }) {
+export default function ProgressArc({ phase }) {
   const phaseProgress = PHASE_PROGRESS[phase] || 0.125;
   const circumference = 2 * Math.PI * 45;
   const strokeDasharray = circumference;
@@ -18,7 +18,7 @@ export default function ProgressArc({ density, phase }) {
       <p className="text-[#8a8680] text-xs tracking-[0.2em] uppercase mb-6">
         Realm Progress
       </p>
-      
+
       <div className="relative w-32 h-32">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
           {/* Background circle */}
@@ -30,7 +30,7 @@ export default function ProgressArc({ density, phase }) {
             stroke="#2a2a2a"
             strokeWidth="2"
           />
-          
+
           {/* Progress arc */}
           <circle
             cx="50"
@@ -46,7 +46,7 @@ export default function ProgressArc({ density, phase }) {
             opacity="0.6"
           />
         </svg>
-        
+
         {/* Center text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="font-serif text-2xl">{phase}</span>

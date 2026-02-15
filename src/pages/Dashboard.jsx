@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { localApi } from "@/api/localApi";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { format, differenceInDays, subDays } from "date-fns";
-import SetupCultivation from "@/components/cultivation/SetupCultivation";
+import { differenceInDays, subDays } from "date-fns";
+
 import RealmIndicator from "@/components/cultivation/RealmIndicator";
 import StateIndicator from "@/components/cultivation/StateIndicator";
 import ProgressArc from "@/components/cultivation/ProgressArc";
@@ -15,7 +15,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const cultivationId = searchParams.get("id");
 
-  const { data: cultivation, isLoading: cultivationLoading, refetch } = useQuery({
+  const { data: cultivation, isLoading: cultivationLoading } = useQuery({
     queryKey: ["cultivation", cultivationId],
     queryFn: async () => {
       if (cultivationId) {
